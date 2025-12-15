@@ -11,15 +11,15 @@ extends Node2D
 # Atlas Coords for your TileSet (Source ID 0 assumed)
 # Update these to match your specific TileSet assets
 const TILES = {
-	0: Vector2i(0, 8), # Ocean
-	1: Vector2i(0, 1), # Desert
-	2: Vector2i(0, 12), # Shrubland
-	3: Vector2i(3, 3), # Taiga
-	4: Vector2i(2, 3), # Tundra
-	5: Vector2i(0, 0), # Snow
-	6: Vector2i(0, 9), # Grassland
-	7: Vector2i(0, 3), # Forest
-	8: Vector2i(1, 3)  # Rain Forest
+	0: { "source_id": 0, "atlas_coord": Vector2i(0, 8) }, # Ocean
+	1: { "source_id": 0, "atlas_coord": Vector2i(0, 1) }, # Desert
+	2: { "source_id": 0, "atlas_coord": Vector2i(0, 12) }, # Shrubland
+	3: { "source_id": 1, "atlas_coord": Vector2i(0, 2) }, # Taiga
+	4: { "source_id": 0, "atlas_coord": Vector2i(2, 3) }, # Tundra
+	5: { "source_id": 1, "atlas_coord": Vector2i(0, 0) }, # Snow
+	6: { "source_id": 0, "atlas_coord": Vector2i(0, 9) }, # Grassland
+	7: { "source_id": 0, "atlas_coord": Vector2i(0, 3) }, # Forest
+	8: { "source_id": 1, "atlas_coord": Vector2i(0, 0) }  # Rain Forest
 }
 
 func _ready() -> void:
@@ -79,8 +79,9 @@ func generate_new_map() -> void:
 			var biome_id = generator.r_biome[region_idx]
 			
 			# Set Tile
-			var atlas_coord = TILES.get(biome_id, Vector2i(0,0))
-			tile_map.set_cell(hex_coords, 0, atlas_coord)
+			var tile_data = TILES.get(biome_id)
+			if tile_data:
+				tile_map.set_cell(hex_coords, tile_data.source_id, tile_data.atlas_coord)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
