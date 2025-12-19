@@ -238,7 +238,7 @@ var _tiles: Array = []
 
 func _ready() -> void:
 	var camera = CameraController.new()
-	camera.zoom = Vector2(0.2, 0.2)
+	camera.zoom = Vector2(camera.min_zoom, camera.min_zoom)
 	add_child(camera)
 	generate_new_map()
 

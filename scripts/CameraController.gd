@@ -2,8 +2,8 @@ class_name CameraController
 extends Camera2D
 
 # Configurable parameters
-@export var min_zoom: float = 0.1
-@export var max_zoom: float = 2.0
+@export var min_zoom: float = 0.4
+@export var max_zoom: float = 3.0
 @export var zoom_rate: float = 0.1
 @export var zoom_speed: float = 10.0 # How fast the smooth zoom interpolation is
 
