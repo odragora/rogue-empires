@@ -25,6 +25,11 @@ extends Node2D
 @export var peaks_octaves: int = 5
 @export var peaks_strength: float = 0.72
 
+@export_group("Ocean Border")
+@export var ocean_border_enabled: bool = true
+@export var ocean_border_width: float = 0.15  # Fraction of map size for falloff
+@export var ocean_border_strength: float = 1.0  # How much to reduce elevation at edges
+
 @export_group("Ridge Mountains")
 @export var ridge_scale_long: float = 30.0
 @export var ridge_scale_short: float = 9.0
@@ -377,6 +382,10 @@ func _build_fields() -> void:
 	for y in range(map_height):
 		for x in range(map_width):
 			_elev[y][x] = (raw_elev[y][x] - elev_min) / elev_range
+	
+	# Apply ocean border falloff (push edges below sea level)
+	if ocean_border_enabled:
+		_apply_ocean_border()
 	
 	# Smooth elevation (box blur)
 	_elev = _smooth_box(_elev, continental_smooth)
@@ -839,6 +848,29 @@ func _ridged01(val: float) -> float:
 func _hash01(r: int, c: int, tag: String) -> float:
 	var h = hash(str(seed_value) + "|" + tag + "|" + str(r) + "|" + str(c))
 	return float(h & 0x7FFFFFFF) / float(0x7FFFFFFF)
+
+func _apply_ocean_border() -> void:
+	# Reduce elevation near edges to create ocean border
+	var border_x = int(map_width * ocean_border_width)
+	var border_y = int(map_height * ocean_border_width)
+	
+	for y in range(map_height):
+		for x in range(map_width):
+			# Distance from each edge (normalized 0-1 within border zone)
+			var dist_left = float(x) / float(max(1, border_x))
+			var dist_right = float(map_width - 1 - x) / float(max(1, border_x))
+			var dist_top = float(y) / float(max(1, border_y))
+			var dist_bottom = float(map_height - 1 - y) / float(max(1, border_y))
+			
+			# Take minimum distance to any edge, clamped to 1
+			var edge_dist = min(min(dist_left, dist_right), min(dist_top, dist_bottom))
+			edge_dist = clamp(edge_dist, 0.0, 1.0)
+			
+			# Smooth falloff using smoothstep-like curve
+			var falloff = edge_dist * edge_dist * (3.0 - 2.0 * edge_dist)
+			
+			# Apply falloff to elevation
+			_elev[y][x] *= lerp(1.0 - ocean_border_strength, 1.0, falloff)
 
 func _hex_neighbors(x: int, y: int) -> Array:
 	var deltas: Array
