@@ -36,31 +36,96 @@ extends Node2D
 # User mentioned: assets/map/terrain/pixel_tiles_terrain.png
 # Format: "name": [{source_id, atlas_coord}, ...]
 const TILES = {
-	"deep_water": [{"source_id": 0, "atlas_coord": Vector2i(3, 0)}],
-	"water": [{"source_id": 0, "atlas_coord": Vector2i(2, 8)}],
-	"shallow_water": [{"source_id": 0, "atlas_coord": Vector2i(4, 5)}],
+	"deep_water": [
+		{"source_id": 0, "atlas_coord": Vector2i(3, 0)},
+		{"source_id": 0, "atlas_coord": Vector2i(4, 0)},
+	],
+	"water": [
+		{"source_id": 0, "atlas_coord": Vector2i(2, 8)},
+		{"source_id": 0, "atlas_coord": Vector2i(3, 8)},
+	],
+	"shallow_water": [
+		{"source_id": 0, "atlas_coord": Vector2i(4, 5)},
+		{"source_id": 0, "atlas_coord": Vector2i(0, 6)},
+	],
 	
-	"beach": [{"source_id": 0, "atlas_coord": Vector2i(2, 5)}],
-	"sand": [{"source_id": 0, "atlas_coord": Vector2i(3, 5)}],
-	"dunes": [{"source_id": 0, "atlas_coord": Vector2i(2, 1)}],
+	"beach": [
+		{"source_id": 0, "atlas_coord": Vector2i(2, 5)},
+	],
+	"sand": [
+		{"source_id": 0, "atlas_coord": Vector2i(3, 5)},
+	],
+	"dunes": [
+		{"source_id": 0, "atlas_coord": Vector2i(2, 1)},
+		{"source_id": 0, "atlas_coord": Vector2i(3, 1)},
+	],
 
-	"grass": [{"source_id": 0, "atlas_coord": Vector2i(1, 3)}],
-	"forest": [{"source_id": 0, "atlas_coord": Vector2i(0, 2)}],
-	"jungle": [{"source_id": 0, "atlas_coord": Vector2i(4, 3)}],
+	"grass": [
+		{"source_id": 0, "atlas_coord": Vector2i(3, 2)},
+		{"source_id": 0, "atlas_coord": Vector2i(4, 2)},
+		{"source_id": 0, "atlas_coord": Vector2i(0, 3)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 3)},
+	],
+	"forest": [
+		{"source_id": 0, "atlas_coord": Vector2i(4, 1)},
+		{"source_id": 0, "atlas_coord": Vector2i(0, 2)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 2)},
+		{"source_id": 0, "atlas_coord": Vector2i(2, 2)},
+	],
+	"jungle": [
+		{"source_id": 0, "atlas_coord": Vector2i(4, 3)},
+		{"source_id": 0, "atlas_coord": Vector2i(0, 4)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 4)},
+		{"source_id": 0, "atlas_coord": Vector2i(2, 4)},
+	],
 	
-	"dirt": [{"source_id": 0, "atlas_coord": Vector2i(0, 1)}],
-	"clay": [{"source_id": 0, "atlas_coord": Vector2i(1, 0)}],
+	"dirt": [
+		{"source_id": 0, "atlas_coord": Vector2i(0, 1)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 1)},
+	],
+	"clay": [
+		{"source_id": 0, "atlas_coord": Vector2i(0, 0)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 0)},
+		{"source_id": 0, "atlas_coord": Vector2i(2, 0)},
+	],
 	
-	"hills": [{"source_id": 0, "atlas_coord": Vector2i(2, 3)}],
-	"mountains": [{"source_id": 0, "atlas_coord": Vector2i(3, 4)}],
-	"snow": [{"source_id": 0, "atlas_coord": Vector2i(1, 6)}],
+	"hills": [
+		{"source_id": 0, "atlas_coord": Vector2i(2, 3)},
+		{"source_id": 0, "atlas_coord": Vector2i(3, 3)},
+	],
+	"mountains": [
+		{"source_id": 0, "atlas_coord": Vector2i(3, 4)},
+		{"source_id": 0, "atlas_coord": Vector2i(4, 4)},
+	],
+	"snow": [
+		{"source_id": 0, "atlas_coord": Vector2i(1, 6)},
+		{"source_id": 0, "atlas_coord": Vector2i(2, 6)},
+	],
 	
-	"swamp": [{"source_id": 0, "atlas_coord": Vector2i(2, 7)}],
-	"swamp_pads": [{"source_id": 0, "atlas_coord": Vector2i(3, 6)}],
-	"swamp_reeds": [{"source_id": 0, "atlas_coord": Vector2i(0, 7)}],
+	"swamp": [
+		{"source_id": 0, "atlas_coord": Vector2i(2, 7)},
+		{"source_id": 0, "atlas_coord": Vector2i(3, 7)},
+	],
+	"swamp_pads": [
+		{"source_id": 0, "atlas_coord": Vector2i(3, 6)},
+		{"source_id": 0, "atlas_coord": Vector2i(4, 6)},
+	],
+	"swamp_reeds": [
+		{"source_id": 0, "atlas_coord": Vector2i(0, 7)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 7)},
+	],
 	
-	"tiaga": [{"source_id": 0, "atlas_coord": Vector2i(1, 8)}], # Assuming cold forest
-	"wheat": [{"source_id": 0, "atlas_coord": Vector2i(4, 8)}],
+	"tiaga": [
+		{"source_id": 0, "atlas_coord": Vector2i(4, 7)},
+		{"source_id": 0, "atlas_coord": Vector2i(0, 8)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 8)},
+	], # Assuming cold forest
+	"wheat": [
+		{"source_id": 0, "atlas_coord": Vector2i(4, 8)},
+		{"source_id": 0, "atlas_coord": Vector2i(0, 9)},
+		{"source_id": 0, "atlas_coord": Vector2i(1, 9)},
+		{"source_id": 0, "atlas_coord": Vector2i(2, 9)},
+	],
 }
 
 var _rng: RandomNumberGenerator
