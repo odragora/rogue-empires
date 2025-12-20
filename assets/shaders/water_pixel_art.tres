@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://hcro0ic71qab"]
+
+[ext_resource type="Shader" uid="uid://bdig0fm8llcdx" path="res://assets/shaders/water_pixel_art.gdshader" id="1_p3378"]
+
+[resource]
+shader = ExtResource("1_p3378")
+shader_parameter/color_variation = 0.2000000095
+shader_parameter/cycle_speed = 1.00000002375
+shader_parameter/wave_scale = 8.000000284999999
+shader_parameter/highlight_chance = 0.03600000171
+shader_parameter/pixel_size = 1.0

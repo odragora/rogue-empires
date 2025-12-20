@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://cybnek2o66d1x" path="res://assets/shaders/wind_motion.tres" id="2_eaq8r"]
 [ext_resource type="Texture2D" uid="uid://de01167ao727p" path="res://assets/map/terrain/terrain.png" id="2_glms7"]
 [ext_resource type="Texture2D" uid="uid://blpeiuutjm5ob" path="res://assets/map/terrain/pixel_tiles_terrain.png" id="2_oo155"]
-[ext_resource type="Material" uid="uid://csqetnrk86yjr" path="res://assets/shaders/water_reflection.tres" id="3_ternb"]
+[ext_resource type="Material" uid="uid://hcro0ic71qab" path="res://assets/shaders/water_pixel_art.tres" id="3_ternb"]
 [ext_resource type="Texture2D" uid="uid://c2to32mqo2mrk" path="res://assets/map/terrain/1.png" id="3_udu3i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eaq8r"]
