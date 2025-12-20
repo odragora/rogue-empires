@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://drdb2eopwvdmu"]
+[gd_scene load_steps=11 format=4 uid="uid://drdb2eopwvdmu"]
 
 [ext_resource type="Script" uid="uid://cr8lx0g7b1p4f" path="res://scripts/GameMap.gd" id="1_hwd4i"]
 [ext_resource type="Material" uid="uid://cybnek2o66d1x" path="res://assets/shaders/wind_motion.tres" id="2_eaq8r"]
 [ext_resource type="Texture2D" uid="uid://de01167ao727p" path="res://assets/map/terrain/terrain.png" id="2_glms7"]
 [ext_resource type="Texture2D" uid="uid://blpeiuutjm5ob" path="res://assets/map/terrain/pixel_tiles_terrain.png" id="2_oo155"]
+[ext_resource type="Material" uid="uid://csqetnrk86yjr" path="res://assets/shaders/water_reflection.tres" id="3_ternb"]
 [ext_resource type="Texture2D" uid="uid://c2to32mqo2mrk" path="res://assets/map/terrain/1.png" id="3_udu3i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eaq8r"]
@@ -15,7 +16,9 @@ texture_region_size = Vector2i(26, 32)
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
+3:0/0/material = ExtResource("3_ternb")
 4:0/0 = 0
+4:0/0/material = ExtResource("3_ternb")
 4:1/0 = 0
 4:1/0/material = ExtResource("2_eaq8r")
 3:1/0 = 0
@@ -45,11 +48,13 @@ texture_region_size = Vector2i(26, 32)
 3:4/0 = 0
 4:4/0 = 0
 4:5/0 = 0
+4:5/0/material = ExtResource("3_ternb")
 3:5/0 = 0
 2:5/0 = 0
 1:5/0 = 0
 0:5/0 = 0
 0:6/0 = 0
+0:6/0/material = ExtResource("3_ternb")
 1:6/0 = 0
 2:6/0 = 0
 3:6/0 = 0
@@ -65,7 +70,9 @@ texture_region_size = Vector2i(26, 32)
 1:8/0 = 0
 1:8/0/material = ExtResource("2_eaq8r")
 2:8/0 = 0
+2:8/0/material = ExtResource("3_ternb")
 3:8/0 = 0
+3:8/0/material = ExtResource("3_ternb")
 4:8/0 = 0
 0:9/0 = 0
 1:9/0 = 0

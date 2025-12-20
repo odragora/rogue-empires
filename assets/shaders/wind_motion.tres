@@ -4,9 +4,9 @@
 
 [resource]
 shader = ExtResource("1_g4jy6")
-shader_parameter/wind_start_threshold = 0.110000005225
-shader_parameter/wind_end_threshold = 2.786000132335
-shader_parameter/wind_end_threshold_2 = 1.28400006099
+shader_parameter/wind_start_threshold = 0.10000000475
+shader_parameter/wind_end_threshold = 3.930000186675
+shader_parameter/wind_end_threshold_2 = 0.966000045885
 shader_parameter/wind_strength = 0.2
 shader_parameter/wind_speed = 1.0
 shader_parameter/scale = 1.0
