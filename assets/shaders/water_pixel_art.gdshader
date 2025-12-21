@@ -9,6 +9,10 @@ uniform float color_variation : hint_range(0.0, 1.0) = 0.4;
 uniform float wave_speed : hint_range(0.01, 5.0) = 1.5;
 uniform float wave_scale : hint_range(2.0, 32.0) = 8.0;
 
+// === Texture Scrolling (for tiles with drawn waves) ===
+uniform bool scroll_texture = false;
+uniform float texture_scroll_speed : hint_range(0.01, 2.0) = 0.1;
+
 // === Highlight Settings ===
 uniform float highlight_speed : hint_range(0.5, 5.0) = 2.0;
 uniform float highlight_chance : hint_range(0.0, 1.0) = 0.15;
@@ -35,8 +39,35 @@ void fragment() {
     vec2 pixel_coord = floor(screen_pos / wave_scale);
     
     // Get base texture color
-    vec4 tex_color = texture(TEXTURE, UV);
+    // Optionally scroll the texture diagonally (toward bottom-right visually)
+    vec2 sample_uv = UV;
+    if (scroll_texture) {
+        float scroll_time = TIME * texture_scroll_speed;
+        
+        // Convert UV to local tile coordinates (0-1 within tile region)
+        // REGION_RECT.xy = atlas origin, REGION_RECT.zw = tile size in atlas
+        vec2 local_uv = (UV - REGION_RECT.xy) / REGION_RECT.zw;
+        
+        // Scroll diagonally and wrap within the tile
+        // Negative = content moves toward bottom-right visually
+        vec2 scroll_offset = vec2(-scroll_time, -scroll_time) * 0.1;
+        vec2 scrolled_local_uv = fract(local_uv + scroll_offset);
+        
+        // Add small inset to avoid sampling at exact tile boundaries
+        // This prevents edge bleeding from adjacent atlas tiles
+        vec2 padding = TEXTURE_PIXEL_SIZE * 0.5;
+        vec2 region_min = REGION_RECT.xy + padding;
+        vec2 region_max = REGION_RECT.xy + REGION_RECT.zw - padding;
+        vec2 region_size = region_max - region_min;
+        
+        // Convert back to atlas UV space with padding
+        sample_uv = scrolled_local_uv * region_size + region_min;
+    }
+    vec4 tex_color = texture(TEXTURE, sample_uv);
     vec3 base_color = tex_color.rgb;
+    
+    // Keep original alpha from non-scrolled UV to preserve hex mask
+    float original_alpha = texture(TEXTURE, UV).a;
     
     // === Generate 4-color palette from base texture color ===
     float dark_mult = 1.0 - color_variation * 0.6;
@@ -94,5 +125,7 @@ void fragment() {
     wave_color = mix(wave_color, min(color_4 * 1.3, vec3(1.0)), sparkle);
     
     // Preserve original alpha (masks non-hexagonal parts)
-    COLOR = vec4(wave_color, tex_color.a);
+    // Use original_alpha when scrolling to keep hex shape, otherwise use tex_color.a
+    float final_alpha = scroll_texture ? original_alpha : tex_color.a;
+    COLOR = vec4(wave_color, final_alpha);
 }
