@@ -5,13 +5,13 @@
 [resource]
 shader = ExtResource("1_gtvwb")
 shader_parameter/wave_speed = 0.8
-shader_parameter/wave_strength = 0.0010000000475
+shader_parameter/wave_strength = 0.001
 shader_parameter/wave_frequency = 8.0
-shader_parameter/shallow_color = Color(0.2, 0.5019608, 0.69803923, 0)
-shader_parameter/deep_color = Color(0.050980393, 0.2, 0.4, 0.09803922)
+shader_parameter/shallow_color = Color(0.2, 0.50196, 0.698, 0)
+shader_parameter/deep_color = Color(0.05098, 0.2, 0.4, 0.098)
 shader_parameter/color_blend_speed = 0.5
-shader_parameter/shimmer_intensity = 0.046000002185
-shader_parameter/shimmer_speed = 1.0150000244625001
-shader_parameter/shimmer_scale = 5.598000028405
+shader_parameter/shimmer_intensity = 0.046
+shader_parameter/shimmer_speed = 1.015
+shader_parameter/shimmer_scale = 5.598
 shader_parameter/foam_threshold = 0.85
 shader_parameter/foam_color = Color(0.9, 0.95, 1, 0.6)
